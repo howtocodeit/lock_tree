@@ -2,5 +2,11 @@
 name = "lock_tree"
 version = "0.1.0"
 edition = "2021"
+license-file = "LICENSE"
+description = "Prevent deadlocks at compile time. A standalone republication of the netstack3 lock-ordering crate, part of Google's Fuchsia OS."
+repository = "https://github.com/howtocodeit/lock_tree"
+readme = "README.md"
+keywords = ["locks", "concurrency", "parallelism", "deadlocks", "lock order"]
+categories = ["concurrency"]
 
 [dependencies]
