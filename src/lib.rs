@@ -11,7 +11,7 @@
 //!
 //! ```
 //! use std::sync::Mutex;
-//! use lock_order::{impl_lock_after, lock::LockFor, relation::LockAfter, Locked, Unlocked};
+//! use lock_tree::{impl_lock_after, lock::LockFor, relation::LockAfter, Locked, Unlocked};
 //!
 //! #[derive(Default)]
 //! struct HoldsLocks {
@@ -61,7 +61,7 @@
 //! This won't compile because `LockB` does not implement `LockBefore<LockA>`:
 //! ```compile_fail
 //! # use std::sync::Mutex;
-//! # use lock_order::{impl_lock_after, lock::LockFor, relation::LockAfter, Locked, Unlocked};
+//! # use lock_tree::{impl_lock_after, lock::LockFor, relation::LockAfter, Locked, Unlocked};
 //! #
 //! # #[derive(Default)]
 //! # struct HoldsLocks {
@@ -110,7 +110,7 @@
 //! access state. This doesn't work:
 //! ```compile_fail
 //! # use std::sync::Mutex;
-//! # use lock_order::{impl_lock_after, lock::LockFor, relation::LockAfter, Locked, Unlocked};
+//! # use lock_tree::{impl_lock_after, lock::LockFor, relation::LockAfter, Locked, Unlocked};
 //! #
 //! # #[derive(Default)]
 //! # struct HoldsLocks {
@@ -539,10 +539,10 @@ where
     /// # Examples
     ///
     /// ```no_run
-    /// use lock_order::{Locked, relation::LockBefore};
+    /// use lock_tree::{Locked, relation::LockBefore};
     /// struct StateA;
     /// struct StateB;
-    /// # impl lock_order::lock::LockFor<LockX> for StateB {
+    /// # impl lock_tree::lock::LockFor<LockX> for StateB {
     /// #   type Data = u8;
     /// #   type Guard<'l> = std::sync::MutexGuard<'l, u8>
     /// #       where Self: 'l;
@@ -665,7 +665,7 @@ mod test {
         //! Lock ordering tree:
         //! A -> B -> {C, D}
 
-        extern crate self as lock_order;
+        extern crate self as lock_tree;
 
         use crate::relation::LockAfter;
         use crate::{impl_lock_after, Unlocked};

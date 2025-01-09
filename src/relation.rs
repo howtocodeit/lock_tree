@@ -15,7 +15,7 @@
 //! `LockAfter`, it also provides a blanket implementation equivalent to this:
 //!
 //! ```no_run
-//! # use lock_order::relation::LockAfter;
+//! # use lock_tree::relation::LockAfter;
 //! # enum A {}
 //! # enum B {}
 //! impl <X> LockAfter<X> for B where A: LockAfter<X> {}
@@ -37,7 +37,7 @@
 //! implementations:
 //!
 //! ```no_run
-//! # use lock_order::relation::LockAfter;
+//! # use lock_tree::relation::LockAfter;
 //! # enum A {}
 //! # enum B {}
 //! # enum C {}
@@ -52,7 +52,7 @@
 //! us these two impls:
 //!
 //! ```no_run
-//! # use lock_order::relation::LockAfter;
+//! # use lock_tree::relation::LockAfter;
 //! # enum A {}
 //! # enum C {}
 //! // New edge
@@ -119,8 +119,8 @@ impl<B: LockAfter<A>, A> LockBefore<B> for A {}
 #[macro_export]
 macro_rules! impl_lock_after {
     ($A:ty => $B:ty) => {
-        impl lock_order::relation::LockAfter<$A> for $B {}
-        impl<X: lock_order::relation::LockBefore<$A>> lock_order::relation::LockAfter<X> for $B {}
+        impl lock_tree::relation::LockAfter<$A> for $B {}
+        impl<X: lock_tree::relation::LockBefore<$A>> lock_tree::relation::LockAfter<X> for $B {}
     };
 }
 
@@ -131,7 +131,7 @@ mod test {
     use crate::{Locked, Unlocked};
     use std::sync::{Mutex, MutexGuard};
 
-    extern crate self as lock_order;
+    extern crate self as lock_tree;
 
     enum A {}
     enum B {}
