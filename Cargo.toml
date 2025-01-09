@@ -7,6 +7,6 @@ description = "Prevent deadlocks at compile time. A standalone republication of 
 repository = "https://github.com/howtocodeit/lock_tree"
 readme = "README.md"
 keywords = ["locks", "concurrency", "parallelism", "deadlocks", "lock order"]
-categories = ["concurrency"]
+categories = ["concurrency", "no-std", "no-std::no-alloc"]
 
 [dependencies]
